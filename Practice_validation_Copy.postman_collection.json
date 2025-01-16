@@ -1,0 +1,403 @@
+{
+	"info": {
+		"_postman_id": "44ed6279-6c83-478d-a4c0-55752c80c521",
+		"name": "Practice_validation_Copy",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "34054409"
+	},
+	"item": [
+		{
+			"name": "New Request",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData=pm.response.json()",
+							"var movie= []",
+							"pm.test(\"check number of ids/movie returned\",function()",
+							"{",
+							"    for (var i= 0 ; i<jsonData.length; i++ ){",
+							"        // write all ids//",
+							"        //console.log(jsonData[i].movie)",
+							"",
+							"        // push all movie name in another array//",
+							"        movie.push(jsonData[i].movie)",
+							"  ",
+							"    }",
+							"    console.log(movie)",
+							"})",
+							"",
+							"//to check one of the movie name is FightClub .",
+							"",
+							"pm.test(\"check movie name\", function(){",
+							"    if(pm.expect(movie.includes('Fight Club')).to.eql(true)){",
+							"        console.log(\"fight club is present\")",
+							"    }",
+							"    else{",
+							"        console.log(\" not present\")",
+							"    } ",
+							"})",
+							"",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"packages": {},
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://dummyapi.online/api/movies",
+					"protocol": "https",
+					"host": [
+						"dummyapi",
+						"online"
+					],
+					"path": [
+						"api",
+						"movies"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "lesson21",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							" var abc = pm.response.json();",
+							"pm.test(\"check country\", function(){",
+							"   pm.expect(abc.address.country[0]).to.equal(\"India\")",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var moment = require('moment')//import moment library by using require and take reference from https://momentjs.com/ for below formats",
+							"pm.variables.set('TD',moment());",
+							"",
+							"",
+							"",
+							"",
+							"",
+							"",
+							"",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"sapna\",\n    \"date\": \"{{TD}}\",\n    \"skills\": [\n        \"QA\",\n        \"SM\"\n    ],\n    \"address\": {\n        \"street\": \"152 Hobson Street\",\n        \"city\": \"Auckland\",\n        \"state\": \"Auckland Region\",\n        \"postalCode\": \"1010\",\n        \"country\": [\n            \"India\",\n            \"NZ\"\n        ]\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://reqres.in/api/users",
+					"protocol": "https",
+					"host": [
+						"reqres",
+						"in"
+					],
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Lesson21and22",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Fixed ReferenceError by adding quotes around Content-Type\r",
+							"pm.test(\"Status in BDD chain\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"status in chai assertion\", function () {\r",
+							"    \r",
+							"    pm.expect(pm.response.code).to.eql(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"status is one of the allowed codes\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 201, 400]);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"response timebelow check\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"check content type is present in response error\", function () {\r",
+							"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.be.equal(\"application/json; charset=utf-8\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://reqres.in/api/users",
+					"protocol": "https",
+					"host": [
+						"reqres",
+						"in"
+					],
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "lesson23",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// //write name using for loop",
+							"var jsondata= pm.response.json()",
+							"",
+							"let B=[]",
+							"pm.test(\"all ids\", function () {",
+							"    ",
+							"    for(i=0;i<jsondata.data.length; i++)",
+							"    {",
+							"        B.push(jsondata.data[i].id)",
+							"    }",
+							"",
+							"",
+							"});",
+							"console.log(B)",
+							"",
+							"",
+							"// //write all name,id using map method",
+							"pm.test(\"check all name and ids\",function(){",
+							"",
+							"    var array = jsondata.data",
+							"    var allid= array.map(i=>i.id)",
+							"    console.log (allid)",
+							"})",
+							"",
+							"",
+							"pm.test(\"filter certain particularid\",function(){",
+							" var particularid= jsondata.data.filter(a=>a.id===1)",
+							" console.log(particularid)",
+							"",
+							"})",
+							"",
+							"pm.test(\"filter certain test\",function(){",
+							" var abc= jsondata.data.filter(a=>a.id===1).map(a=>a.email)",
+							" console.log(abc)",
+							"",
+							"})",
+							"",
+							"//or",
+							"pm.test(\"includes particular name\", function () {",
+							"    var names = jsondata.data.map(i=> {return i.first_name});",
+							"    // console.log(names)",
+							"     pm.expect(names.includes(\"George\")).to.equal(true)",
+							"     ",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"",
+							"",
+							"",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://reqres.in/api/users",
+					"protocol": "https",
+					"host": [
+						"reqres",
+						"in"
+					],
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "lesson23 Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//write name using for loop",
+							"var jsondata= pm.response.json()",
+							"",
+							"let B=[]",
+							"pm.test(\"all ids\", function () {",
+							"    ",
+							"    for(i=0;i<jsondata.data.length; i++)",
+							"    {",
+							"        B.push(jsondata.data[i].id)",
+							"    }",
+							"",
+							"",
+							"});",
+							"console.log(B)",
+							"",
+							"",
+							"//write all name,id using map method",
+							"pm.test(\"check all name and ids\",function(){",
+							"",
+							"    var array = jsondata.data",
+							"    var allid= array.map(i=>i.id)",
+							"    console.log (allid)",
+							"})",
+							"pm.test(\"filter certain particularid\"),function(){",
+							" var particularid= jsondata.data.filter(a=>a.id===1)",
+							" console.log(particularid)",
+							"}",
+							"//or",
+							"// pm.test(\"all name and id list\", function () {",
+							"//     var names = jsondata.data.map(i=> {return i.first_name});",
+							"//     console.log(names)",
+							"//      var id= jsondata.data.map(i=> {return i.id})",
+							"//      console.log(id)",
+							"//      pm.expect(names.includes(\"George\")).to.equal(true)",
+							"     ",
+							"// });",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"",
+							"",
+							"",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://reqres.in/api/users",
+					"protocol": "https",
+					"host": [
+						"reqres",
+						"in"
+					],
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "TD",
+			"value": ""
+		},
+		{
+			"key": "repository",
+			"value": ""
+		},
+		{
+			"key": "data_array",
+			"value": ""
+		},
+		{
+			"key": "names",
+			"value": ""
+		}
+	]
+}
